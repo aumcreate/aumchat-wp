@@ -1,7 +1,7 @@
 === AumChat ===
 Contributors: aumcreate
 Tags: live chat, ai chat, customer support, chat widget, chatbot
-Requires at least: 6.0
+Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 7.4
 Stable tag: 1.0.0
@@ -66,8 +66,8 @@ When you press Connect, save a key by hand, or press "Check again", this plugin 
 
 The Connect button sends you to `https://chat.aumcreate.com/wp-connect` with this site's domain and the address of this settings page, so the workspace can send the site key back. You sign in on AumChat's own pages; this plugin never sees your password.
 
-Terms of Service: [https://chat.aumcreate.com/legal#terms](https://chat.aumcreate.com/legal#terms)
-Privacy Policy: [https://chat.aumcreate.com/legal](https://chat.aumcreate.com/legal)
+Terms of Service: https://chat.aumcreate.com/legal#terms
+Privacy Policy: https://chat.aumcreate.com/legal
 
 == Installation ==
 

@@ -97,10 +97,14 @@ class AumChat_Widget {
 			return $tag;
 		}
 
-		return str_replace(
-			' src=',
+		/* Only the first occurrence: a script tag has one src, and a blanket
+		   str_replace() on generated markup is the kind of thing that stops
+		   being true the day someone else filters the same tag. */
+		return (string) preg_replace(
+			'/ src=/',
 			' data-site="' . esc_attr( $settings['site_key'] ) . '" src=',
-			$tag
+			$tag,
+			1
 		);
 	}
 }

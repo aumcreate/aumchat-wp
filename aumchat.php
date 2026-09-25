@@ -3,7 +3,7 @@
  * Plugin Name:       AumChat
  * Description:       Puts the AumChat widget on your site. Connect once; everything else is configured in your AumChat workspace.
  * Version:           1.0.0
- * Requires at least: 6.0
+ * Requires at least: 6.3
  * Requires PHP:      7.4
  * Author:            AumCreate
  * Author URI:        https://aumcreate.com/

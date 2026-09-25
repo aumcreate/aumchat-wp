@@ -12,9 +12,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Checks a site key against the service.
  *
- * This is the only request the plugin itself makes, it happens only in the admin
- * when someone connects or presses "Check again", and it sends only the site key
- * and this site's domain. Visitors are never involved in it.
+ * This is the only request the plugin itself makes, and it happens only in the
+ * admin, when someone connects or presses "Check again". It carries the site key
+ * and this site's address: the key and domain as query parameters, and the same
+ * address again in the user agent, so the service can tell one WordPress install
+ * from another in its logs. Nothing about visitors is involved.
  */
 class AumChat_Service {
 

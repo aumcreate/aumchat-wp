@@ -1,0 +1,145 @@
+/**
+ * AumChat - admin.
+ *
+ * Carries its own copy of the shared Aum ecosystem ".aml-app" design system
+ * (brand #e8501a), so the plugin never depends on another one being
+ * installed. Everything is scoped to .aml-app.
+ *
+ * The skeleton stays WordPress: .wrap, dashicons, core form semantics and
+ * core notices. Only the cards, the logo tile and the primary button are ours,
+ * so the screen still feels like the admin the user already knows.
+ */
+
+.aml-app {
+	--aml-brand: #e8501a;
+	--aml-brand-dark: #c23f12;
+	--aml-ink: #1d2327;
+	--aml-muted: #646970;
+	--aml-faint: #8c8f94;
+	--aml-line: #e4e4e7;
+	--aml-surface: #ffffff;
+	--aml-ok: #0f6e56;
+	--aml-warn: #8a6d1a;
+	--aml-danger: #b32d2e;
+	max-width: 940px;
+	margin-right: 20px;
+}
+
+.aml-app .dashicons { line-height: 1; }
+
+/* Header */
+.aml-header { display: flex; align-items: center; gap: 14px; margin: 18px 0 22px; }
+.aml-logo {
+	width: 46px; height: 46px; border-radius: 13px; background: var(--aml-brand);
+	display: inline-flex; align-items: center; justify-content: center; color: #fff; flex: 0 0 auto;
+}
+.aml-logo .dashicons { font-size: 26px; width: 26px; height: 26px; }
+.aml-title {
+	display: flex; align-items: center; gap: 10px;
+	font-size: 21px; font-weight: 600; line-height: 1.2; margin: 0; padding: 0; color: var(--aml-ink);
+}
+.aml-badge {
+	font-size: 11px; font-weight: 600; letter-spacing: .02em;
+	color: var(--aml-brand-dark); background: #fce6dc; padding: 2px 9px; border-radius: 20px;
+}
+.aml-subtitle { margin: 2px 0 0; color: var(--aml-muted); font-size: 13px; }
+
+/* Cards */
+.aml-app .aml-card {
+	background: var(--aml-surface); border: 1px solid var(--aml-line); border-radius: 14px;
+	padding: 20px 22px; margin: 0 0 16px; box-shadow: 0 1px 2px rgba(0,0,0,.03);
+}
+.aml-card-h {
+	display: flex; align-items: center; gap: 9px;
+	font-size: 15px; font-weight: 600; margin: 0 0 14px; padding: 0; color: var(--aml-ink);
+}
+.aml-card-h .dashicons { color: var(--aml-brand); font-size: 19px; width: 19px; height: 19px; }
+.aml-card-desc { margin: -6px 0 16px; color: var(--aml-muted); font-size: 13px; line-height: 1.6; }
+
+/* Fields */
+.aml-field { margin: 14px 0 0; }
+.aml-label { display: block; font-size: 13px; font-weight: 600; color: var(--aml-ink); margin-bottom: 6px; }
+.aml-field-hint { margin: 8px 0 0; font-size: 12px; color: var(--aml-faint); line-height: 1.6; }
+
+/* Toggle */
+.aml-switch-row { display: flex; align-items: center; gap: 11px; padding: 7px 0; cursor: pointer; }
+.aml-switch { position: relative; display: inline-block; width: 40px; height: 23px; flex: 0 0 auto; }
+.aml-switch input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.aml-track { position: absolute; inset: 0; background: #c9c9d0; border-radius: 12px; transition: background .15s; pointer-events: none; }
+.aml-track::after {
+	content: ""; position: absolute; top: 2.5px; left: 2.5px;
+	width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: left .15s;
+}
+.aml-switch input:checked + .aml-track { background: var(--aml-brand); }
+.aml-switch input:checked + .aml-track::after { left: 19px; }
+.aml-switch input:focus + .aml-track { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--aml-brand); }
+.aml-switch-label { font-size: 13px; color: var(--aml-ink); }
+
+/* Buttons */
+.aml-app .aml-btn {
+	display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+	height: 40px; padding: 0 22px; border-radius: 8px; border: 0;
+	background: var(--aml-brand); color: #fff; font-size: 13px; font-weight: 600;
+	cursor: pointer; text-decoration: none; transition: background .12s;
+}
+.aml-app .aml-btn:hover { background: var(--aml-brand-dark); color: #fff; }
+.aml-app .aml-btn-quiet {
+	background: #fff; color: var(--aml-danger); border: 1px solid #d9b3b3;
+}
+.aml-app .aml-btn-quiet:hover { background: #fbe6e6; color: var(--aml-danger); border-color: var(--aml-danger); }
+.aml-actions-bar { margin: 18px 0 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+/* ---- AumChat specifics ---- */
+
+/* The connected site, stated once, at the top of the card. */
+.aumchat-site { display: flex; align-items: center; gap: 12px; }
+.aumchat-site-name { font-size: 15px; font-weight: 600; color: var(--aml-ink); }
+.aumchat-site-domain { font-size: 12px; color: var(--aml-faint); }
+.aumchat-key { font-size: 12px; background: #f2f2f4; border-radius: 5px; padding: 2px 7px; }
+
+/**
+ * The status line. It is the point of the whole screen: a key that is right but
+ * saved for another domain shows nothing on the site and reports no error
+ * anywhere, so the plugin has to say it out loud.
+ */
+.aumchat-status { display: flex; gap: 9px; align-items: flex-start; font-size: 13px; line-height: 1.6; margin: 16px 0 0; }
+.aumchat-status .dashicons { flex: 0 0 auto; margin-top: 1px; }
+.aumchat-status.is-ok .dashicons { color: var(--aml-ok); }
+.aumchat-status.is-bad .dashicons { color: var(--aml-danger); }
+.aumchat-status.is-wait .dashicons { color: var(--aml-faint); }
+.aumchat-status strong { color: var(--aml-ink); font-weight: 600; }
+.aumchat-status code { font-size: 12px; background: #f2f2f4; border-radius: 5px; padding: 1px 6px; }
+
+/* Visibility rules: one row per rule, the exceptions folded away. */
+.aumchat-rules { margin: 0; }
+.aumchat-rules .aml-switch-row { border-top: 1px solid #f1f1f3; padding: 10px 0; }
+.aumchat-rules .aml-switch-row:first-child { border-top: 0; }
+.aumchat-rule-note { display: block; font-size: 11.5px; color: var(--aml-faint); margin-top: 2px; }
+.aumchat-urls { width: 100%; max-width: 560px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; border-radius: 8px; }
+.aumchat-roles { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 4px 0 0; }
+.aumchat-roles label { font-size: 13px; color: var(--aml-ink); }
+
+/* Folded group, same shape as the other Aum plugins. */
+.aumchat-fold summary {
+	display: flex; align-items: center; gap: 9px;
+	cursor: pointer; list-style: none;
+	font-size: 15px; font-weight: 600; color: var(--aml-ink);
+}
+.aumchat-fold summary::-webkit-details-marker { display: none; }
+.aumchat-fold summary::after {
+	content: ""; margin-left: auto;
+	width: 8px; height: 8px; border-right: 2px solid var(--aml-faint); border-bottom: 2px solid var(--aml-faint);
+	transform: rotate(45deg); transition: transform .15s;
+}
+.aumchat-fold[open] summary::after { transform: rotate(-135deg); }
+.aumchat-fold summary .dashicons { color: var(--aml-brand); font-size: 19px; width: 19px; height: 19px; }
+.aumchat-fold-desc { margin-top: 14px; }
+
+/* Connect screen */
+.aumchat-connect { text-align: center; padding: 26px 22px 30px; }
+.aumchat-connect .aml-btn { height: 46px; padding: 0 30px; font-size: 14px; }
+.aumchat-connect-lead { font-size: 14px; color: var(--aml-ink); margin: 0 0 4px; }
+.aumchat-connect-sub { font-size: 13px; color: var(--aml-muted); margin: 0 0 20px; }
+.aumchat-manual { margin: 0; }
+.aumchat-manual summary { cursor: pointer; font-size: 13px; color: var(--aml-muted); }
+.aumchat-manual input[type="text"] { border-radius: 8px; }

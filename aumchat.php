@@ -30,14 +30,39 @@ define( 'AUMCHAT_RULES_OPTION', 'aumchat_rules' );
  * Hard-coded, https only, and never taken from user input: the widget script is
  * loaded from here into every visitor's browser, so it must not be settable.
  */
-define( 'AUMCHAT_SERVICE', 'https://chat.aumcreate.com' );
+/*
+ * The AumChat service. Sites never need to change this; it exists as a constant so that
+ * development against a local server does not require editing the plugin (define it in wp-config.php).
+ */
+if ( ! defined( 'AUMCHAT_SERVICE' ) ) {
+	define( 'AUMCHAT_SERVICE', 'https://chat.aumcreate.com' );
+}
 
 require_once AUMCHAT_DIR . 'includes/class-aumchat-visibility.php';
 require_once AUMCHAT_DIR . 'includes/class-aumchat-widget.php';
 require_once AUMCHAT_DIR . 'includes/class-aumchat-service.php';
+require_once AUMCHAT_DIR . 'includes/class-aumchat-catalog.php';
 
 if ( is_admin() ) {
 	require_once AUMCHAT_DIR . 'includes/class-aumchat-admin.php';
+}
+
+/**
+ * Saves some settings while keeping the rest.
+ *
+ * Writing the whole option would quietly drop anything the caller did not list — which is how the
+ * sync token disappeared the first time somebody pressed "Check again".
+ *
+ * It lives here, not in the admin class, because the daily sync runs through WP-Cron, where nothing
+ * from wp-admin is loaded: calling an admin-only class from there would be a fatal error on exactly
+ * the path nobody watches.
+ *
+ * @param array $changes Keys to change.
+ * @return void
+ */
+function aumchat_save_settings( $changes ) {
+	$saved = get_option( AUMCHAT_OPTION, array() );
+	update_option( AUMCHAT_OPTION, array_merge( is_array( $saved ) ? $saved : array(), $changes ) );
 }
 
 /**
@@ -49,7 +74,7 @@ if ( is_admin() ) {
  *                     which site is connected without calling the service on every load.
  * site_domain string  Same, used to warn when it stops matching this WordPress site.
  *
- * @return array{site_key:string,site_name:string,site_domain:string}
+ * @return array{site_key:string,site_name:string,site_domain:string,push_token:string,push_at:int,push_count:int}
  */
 function aumchat_get_settings() {
 	$saved = get_option( AUMCHAT_OPTION, array() );
@@ -61,6 +86,9 @@ function aumchat_get_settings() {
 		'site_key'    => isset( $saved['site_key'] ) ? (string) $saved['site_key'] : '',
 		'site_name'   => isset( $saved['site_name'] ) ? (string) $saved['site_name'] : '',
 		'site_domain' => isset( $saved['site_domain'] ) ? (string) $saved['site_domain'] : '',
+		'push_token'  => isset( $saved['push_token'] ) ? (string) $saved['push_token'] : '',
+		'push_at'     => isset( $saved['push_at'] ) ? (int) $saved['push_at'] : 0,
+		'push_count'  => isset( $saved['push_count'] ) ? (int) $saved['push_count'] : 0,
 	);
 }
 
@@ -97,4 +125,8 @@ function aumchat_this_domain() {
 	return $port ? $host . ':' . (int) $port : $host;
 }
 
+register_activation_hook( __FILE__, array( 'AumChat_Catalog', 'activate' ) );
+register_deactivation_hook( __FILE__, array( 'AumChat_Catalog', 'deactivate' ) );
+
 new AumChat_Widget();
+new AumChat_Catalog();

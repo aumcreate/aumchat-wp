@@ -54,6 +54,74 @@ $aumchat_name = '' !== $settings['site_name'] ? $settings['site_name'] : $settin
 	</p>
 </div>
 
+<?php
+/*
+ * Products. Shown only when this site actually has a catalogue: a brochure site has no products,
+ * and a settings box that can never do anything is just one more thing to wonder about.
+ */
+$aumchat_sources = AumChat_Catalog::sources();
+if ( $aumchat_sources ) :
+	$aumchat_names = array_map(
+		static function ( $s ) {
+			return 'nexcart' === $s ? 'AumNexCart' : 'WooCommerce';
+		},
+		$aumchat_sources
+	);
+	$aumchat_sync = get_transient( 'aumchat_sync_result' );
+	?>
+<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" class="aml-card">
+	<input type="hidden" name="action" value="aumchat_sync" />
+	<?php wp_nonce_field( 'aumchat_sync' ); ?>
+
+	<h2 class="aml-card-title"><?php esc_html_e( 'Products', 'aumchat' ); ?></h2>
+	<p class="aml-field-hint">
+		<?php
+		/*
+		 * Names every catalogue found, because both can be present and both are sent. Naming only
+		 * one told shop owners with both that half their catalogue was staying put, while it was
+		 * in fact going out — a small wrong sentence about something that already happened.
+		 */
+		printf(
+			/* translators: %s: names of the catalogue plugins found, e.g. "WooCommerce and AumNexCart". */
+			esc_html__( '%s found on this site. Sending your products lets the widget answer questions about them and show product cards.', 'aumchat' ),
+			esc_html( implode( ' + ', $aumchat_names ) )
+		);
+		?>
+	</p>
+
+	<label class="aml-label" for="aumchat-push-token"><?php esc_html_e( 'Sync token', 'aumchat' ); ?></label>
+	<input
+		type="text"
+		id="aumchat-push-token"
+		name="push_token"
+		class="aml-input"
+		value="<?php echo esc_attr( $settings['push_token'] ); ?>"
+		autocomplete="off"
+		spellcheck="false"
+	/>
+	<p class="aml-field-hint">
+		<?php esc_html_e( 'Copy it from Products in your AumChat workspace. It is a secret — unlike the site key, it is not public.', 'aumchat' ); ?>
+	</p>
+
+	<?php if ( is_array( $aumchat_sync ) ) : ?>
+		<div class="<?php echo $aumchat_sync['ok'] ? 'aml-ok' : 'aml-warn'; ?>"><?php echo esc_html( $aumchat_sync['message'] ); ?></div>
+	<?php elseif ( $settings['push_at'] > 0 ) : ?>
+		<p class="aml-field-hint">
+			<?php
+			printf(
+				/* translators: 1: number of products, 2: how long ago, e.g. "2 hours". */
+				esc_html__( 'Last sync: %1$d products, %2$s ago.', 'aumchat' ),
+				(int) $settings['push_count'],
+				esc_html( human_time_diff( $settings['push_at'], time() ) )
+			);
+			?>
+		</p>
+	<?php endif; ?>
+
+	<p><button type="submit" class="aml-button"><?php esc_html_e( 'Sync products now', 'aumchat' ); ?></button></p>
+</form>
+<?php endif; ?>
+
 <form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 	<input type="hidden" name="action" value="aumchat_rules" />
 	<?php wp_nonce_field( 'aumchat_rules' ); ?>

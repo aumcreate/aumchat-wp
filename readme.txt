@@ -12,9 +12,9 @@ Adds the AumChat widget to your site. Connect once, then answer visitors from yo
 
 == Description ==
 
-AumChat is a hosted customer chat service. This plugin is the installer for it: it connects your site to an AumChat account and prints the widget on your pages. That is all it does.
+AumChat is a hosted customer chat service. This plugin is the installer for it: it connects your site to an AumChat account, prints the widget on your pages, and — if you sell something — keeps the product list on AumChat current so the assistant can answer about it. That is all it does.
 
-Everything a chat widget usually buries in a settings screen — how it looks, who it greets, what the automatic replies say, business hours, your team — lives in the AumChat workspace and applies to every site you connect, including ones that do not run WordPress. So this plugin has no settings screen to speak of. It has a Connect button and a status line.
+Everything a chat widget usually buries in a settings screen — how it looks, who it greets, what the automatic replies say, business hours, your team — lives in the AumChat workspace and applies to every site you connect, including ones that do not run WordPress. So this plugin has no settings screen to speak of: a Connect button, a status line, a box for a sync token, and the rules below for where the widget appears.
 
 = What the status line is for =
 
@@ -25,6 +25,14 @@ It also means a site key that is correct but saved with the wrong domain shows *
 = What you need =
 
 A free AumChat account at [chat.aumcreate.com](https://chat.aumcreate.com/). The free plan includes one website, AI replies each month, and a product catalogue; plans and limits are listed at [aumcreate.com/aumchat](https://aumcreate.com/aumchat). There is no separate licence to enter here and nothing in this plugin is locked.
+
+= Letting the assistant answer about your products =
+
+When WooCommerce or AumNexCart is active, a **Products** card appears with a box for a **sync token**. Copy it from Products in your AumChat workspace; unlike the site key it is a secret, and until you paste it nothing about your products leaves your site.
+
+With a token saved, "Sync products now" sends your published products, and the plugin repeats that once a day — so the assistant quotes today's prices and stock instead of whatever it saw the day you connected. The card then reports what the last sync sent.
+
+The first 2000 published products are synced, and translations made by AumLang are not counted as separate products. Exactly which fields are sent is listed under "External services" below.
 
 = Controlling where the widget appears =
 
@@ -58,11 +66,15 @@ Once a site is connected, every public page loads `https://chat.aumcreate.com/lo
 
 Conversations are kept for the retention period the site owner sets in the workspace (12 months after a conversation closes by default, and they can be deleted sooner). Visitors who never open the chat still cause the loader script to be fetched.
 
-**2. One check from your server, in the admin only.**
+**2. A status check from your server, made in the admin.**
 
 When you press Connect, save a key by hand, or press "Check again", this plugin calls `https://chat.aumcreate.com/api/plugin/site`. It sends the site key and this site's domain, and nothing else. The answer is the site's name, its saved domain, and when the widget was last seen. No visitor data is involved and this request never happens on a front-end page view.
 
-**3. Connecting an account.**
+**3. Your product catalogue, if you turn on product sync.**
+
+Product sync is off until you paste a sync token from your AumChat dashboard. Once you do, this plugin sends your published products to `https://chat.aumcreate.com/api/plugin/products` — when you press "Sync products now", and once a day from then on — so the assistant answers with current prices and stock instead of whatever it saw the day you connected. For each published product it sends the product's post ID, name, price and currency, category, SKU, permalink, image address, short description, full description, specification list and stock status. Drafts, private and trashed products are not read. Nothing about your visitors, customers or orders is sent, and no order, customer or user record is read at any point. Remove the sync token and the daily job sends nothing; deactivate the plugin and the job is removed.
+
+**4. Connecting an account.**
 
 The Connect button sends you to `https://chat.aumcreate.com/wp-connect` with this site's domain and the address of this settings page, so the workspace can send the site key back. You sign in on AumChat's own pages; this plugin never sees your password.
 
@@ -102,7 +114,7 @@ The loader is one small asynchronous script. It does not block rendering, and th
 
 = Does the plugin phone home? =
 
-Only in the admin, and only when you connect or press "Check again". Front-end page views make no request from your server to AumChat. See "External services" above.
+Front-end page views never make a request from your server to AumChat. Your server contacts AumChat in two cases only: in the admin, when you connect or press "Check again"; and, if you have set up product sync, once a day to send your catalogue so prices and stock stay current. Without a sync token that daily job sends nothing, and deactivating the plugin removes it. See "External services" above.
 
 = What happens when I delete the plugin? =
 

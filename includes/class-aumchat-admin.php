@@ -39,6 +39,7 @@ class AumChat_Admin {
 		add_action( 'admin_post_aumchat_disconnect', array( $this, 'handle_disconnect' ) );
 		add_action( 'admin_post_aumchat_recheck', array( $this, 'handle_recheck' ) );
 		add_action( 'admin_post_aumchat_rules', array( $this, 'handle_rules' ) );
+		add_action( 'admin_post_aumchat_sync', array( $this, 'handle_sync' ) );
 		add_filter( 'plugin_action_links_' . plugin_basename( AUMCHAT_FILE ), array( $this, 'action_links' ) );
 	}
 
@@ -188,8 +189,7 @@ class AumChat_Admin {
 				exit;
 			}
 
-			update_option(
-				AUMCHAT_OPTION,
+			aumchat_save_settings(
 				array(
 					'site_key'    => $key,
 					'site_name'   => '',
@@ -200,8 +200,7 @@ class AumChat_Admin {
 			exit;
 		}
 
-		update_option(
-			AUMCHAT_OPTION,
+		aumchat_save_settings(
 			array(
 				'site_key'    => $key,
 				'site_name'   => $status['name'],
@@ -231,6 +230,30 @@ class AumChat_Admin {
 	/**
 	 * Ask the service again, ignoring the cache.
 	 */
+
+	/**
+	 * "Sync products now".
+	 *
+	 * @return void
+	 */
+	public function handle_sync() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'You are not allowed to change these settings.', 'aumchat' ) );
+		}
+		check_admin_referer( 'aumchat_sync' );
+
+		$token = isset( $_POST['push_token'] ) ? sanitize_text_field( wp_unslash( $_POST['push_token'] ) ) : '';
+		if ( '' !== $token ) {
+			aumchat_save_settings( array( 'push_token' => $token ) );
+		}
+
+		$result = AumChat_Catalog::push();
+		set_transient( 'aumchat_sync_result', $result, 60 );
+
+		wp_safe_redirect( $this->page_url( array( 'aumchat_notice' => $result['ok'] ? 'synced' : 'sync_failed' ) ) );
+		exit;
+	}
+
 	public function handle_recheck() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die( esc_html__( 'You are not allowed to change these settings.', 'aumchat' ) );
@@ -241,10 +264,8 @@ class AumChat_Admin {
 		if ( '' !== $settings['site_key'] ) {
 			$status = AumChat_Service::status( $settings['site_key'], aumchat_this_domain(), true );
 			if ( ! is_wp_error( $status ) ) {
-				update_option(
-					AUMCHAT_OPTION,
+				aumchat_save_settings(
 					array(
-						'site_key'    => $settings['site_key'],
 						'site_name'   => $status['name'],
 						'site_domain' => $status['domain'],
 					)

@@ -60,6 +60,15 @@
 .aml-field { margin: 14px 0 0; }
 .aml-label { display: block; font-size: 13px; font-weight: 600; color: var(--aml-ink); margin-bottom: 6px; }
 .aml-field-hint { margin: 8px 0 0; font-size: 12px; color: var(--aml-faint); line-height: 1.6; }
+/*
+ * Sync result. These two had colour tokens from the start (--aml-ok / --aml-warn) but no rules,
+ * so "7 products sent" and "sync failed" rendered identically — plain text, same colour. A wrong
+ * result that looks exactly like a right one is the failure this card exists to make visible.
+ */
+.aml-ok, .aml-warn { margin: 12px 0 0; padding: 9px 12px; border-radius: 8px; font-size: 13px; line-height: 1.5; border: 1px solid; }
+.aml-ok { color: var(--aml-ok); border-color: #b7dfd2; background: #f0faf6; }
+.aml-warn { color: var(--aml-warn); border-color: #eadba6; background: #fdf8e8; }
+
 /* "A token is saved, and it ends in these four characters." Never the token itself. */
 .aml-field-value { margin: 0 0 8px; font-size: 13px; color: var(--aml-faint); }
 .aml-field-value code { font-size: 13px; letter-spacing: 1px; background: none; padding: 0; }

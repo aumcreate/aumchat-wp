@@ -73,7 +73,7 @@ if ( $aumchat_sources ) :
 	<input type="hidden" name="action" value="aumchat_sync" />
 	<?php wp_nonce_field( 'aumchat_sync' ); ?>
 
-	<h2 class="aml-card-title"><?php esc_html_e( 'Products', 'aumchat' ); ?></h2>
+	<h2 class="aml-card-h"><span class="dashicons dashicons-cart"></span><?php esc_html_e( 'Products', 'aumchat' ); ?></h2>
 	<p class="aml-field-hint">
 		<?php
 		/*
@@ -118,7 +118,7 @@ if ( $aumchat_sources ) :
 		type="password"
 		id="aumchat-push-token"
 		name="push_token"
-		class="aml-input"
+		class="regular-text"
 		value=""
 		autocomplete="off"
 		spellcheck="false"
@@ -151,7 +151,7 @@ if ( $aumchat_sources ) :
 		</p>
 	<?php endif; ?>
 
-	<p><button type="submit" class="aml-button"><?php esc_html_e( 'Sync products now', 'aumchat' ); ?></button></p>
+	<p><button type="submit" class="aml-btn"><?php esc_html_e( 'Sync products now', 'aumchat' ); ?></button></p>
 </form>
 <?php endif; ?>
 

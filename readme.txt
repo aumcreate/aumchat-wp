@@ -4,7 +4,7 @@ Tags: live chat, ai chat, customer support, chat widget, chatbot
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,10 @@ When a rule is not enough, one filter decides per request:
 `add_filter( 'aumchat_show_widget', function ( $show ) {
     return is_checkout() ? false : $show;
 } );`
+
+= Source code =
+
+The released source is on GitHub at https://github.com/aumcreate/aumchat-wp — bug reports and pull requests are welcome there.
 
 == External services ==
 
@@ -123,10 +127,14 @@ The stored site key and the cached status are removed and the widget stops appea
 == Screenshots ==
 
 1. Settings → AumChat before connecting: one button.
-2. A connected site: the status line confirms AumChat is seeing the widget, and the rules below decide where it appears.
+2. A connected site: the status line confirms AumChat is seeing the widget, product sync keeps the catalogue current, and the rules below decide where it appears.
 3. The status line catching the common mistake — a key saved for a different domain, which otherwise shows nothing at all.
+4. Product sync: the saved token is never shown back — only its last four characters — and the card reports what the last sync actually sent.
 
 == Changelog ==
+
+= 1.0.1 =
+* Added a link to the plugin's source on GitHub. No code changes.
 
 = 1.0.0 =
 * First release.

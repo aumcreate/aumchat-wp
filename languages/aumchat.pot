@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: AumChat 1.0.0\n"
+"Project-Id-Version: AumChat 1.0.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/aumchat\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-28T06:56:19+00:00\n"
+"POT-Creation-Date: 2026-09-28T14:20:22+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: aumchat\n"
@@ -289,31 +289,31 @@ msgid "No published products were found, so nothing was sent."
 msgstr ""
 
 #. translators: %d: HTTP status code returned by the AumChat service.
-#: includes/class-aumchat-catalog.php:412
+#: includes/class-aumchat-catalog.php:426
 #, php-format
 msgid "AumChat replied with HTTP %d."
 msgstr ""
 
 #. translators: %d: number of products beyond the plugin's own limit.
-#: includes/class-aumchat-catalog.php:430
+#: includes/class-aumchat-catalog.php:444
 #, php-format
 msgid "%d were not read at all: this plugin syncs the first 2000 products."
 msgstr ""
 
 #. translators: %d: number of products refused because of the AumChat plan limit.
-#: includes/class-aumchat-catalog.php:437
+#: includes/class-aumchat-catalog.php:451
 #, php-format
 msgid "%d were refused because your AumChat plan has a lower product limit."
 msgstr ""
 
 #. translators: 1: number of products sent, 2: catalogue name.
-#: includes/class-aumchat-catalog.php:447
-#: includes/class-aumchat-catalog.php:459
+#: includes/class-aumchat-catalog.php:461
+#: includes/class-aumchat-catalog.php:473
 #, php-format
 msgid "Sent %1$d products from %2$s."
 msgstr ""
 
-#: includes/class-aumchat-catalog.php:450
+#: includes/class-aumchat-catalog.php:464
 msgid "The assistant will not know about those."
 msgstr ""
 

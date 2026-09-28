@@ -383,11 +383,25 @@ class AumChat_Catalog {
 				'headers' => array(
 					'Content-Type'  => 'application/json',
 					'Authorization' => 'Bearer ' . $token,
+					/* Same identifying agent the rest of the plugin sends, so a support question has a site to point at. */
+					'User-Agent'    => 'AumChat WordPress plugin/' . AUMCHAT_VERSION . '; ' . home_url( '/' ),
 				),
 				'body'    => wp_json_encode(
 					array(
 						'source'   => $source,
 						'products' => $items,
+						/*
+						 * The site this plugin is connected to. It is not a credential — the token is —
+						 * and AumChat does not authenticate with it. It is sent so AumChat can refuse a
+						 * push whose token belongs to a different site.
+						 *
+						 * That mismatch is easy to make: a shop owner with two sites copies the token from
+						 * the wrong workspace. Without this field the products land in the other workspace,
+						 * this card reports "Last sync: N products", and the widget on this site keeps
+						 * answering from a catalogue that never changed. Every step succeeds and nothing
+						 * anywhere says a word.
+						 */
+						'siteKey'  => (string) aumchat_settings()['site_key'],
 					)
 				),
 			)

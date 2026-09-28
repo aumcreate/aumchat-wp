@@ -242,8 +242,15 @@ class AumChat_Admin {
 		}
 		check_admin_referer( 'aumchat_sync' );
 
+		/*
+		 * Empty means "keep what is stored" — the field is rendered empty on every load because the
+		 * saved token is never printed back (see admin/views/connected.php). Clearing it therefore
+		 * needs its own control, or a stored token could never be removed.
+		 */
 		$token = isset( $_POST['push_token'] ) ? sanitize_text_field( wp_unslash( $_POST['push_token'] ) ) : '';
-		if ( '' !== $token ) {
+		if ( isset( $_POST['forget_token'] ) ) {
+			aumchat_save_settings( array( 'push_token' => '' ) );
+		} elseif ( '' !== $token ) {
 			aumchat_save_settings( array( 'push_token' => $token ) );
 		}
 

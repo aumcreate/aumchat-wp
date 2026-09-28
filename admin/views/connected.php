@@ -89,19 +89,52 @@ if ( $aumchat_sources ) :
 		?>
 	</p>
 
+	<?php
+	/*
+	 * The saved token is never printed back. Only the last four characters are, and only to answer
+	 * "is one saved?".
+	 *
+	 * Why it matters: this value can write the whole catalogue into the shop's AumChat workspace,
+	 * and the field used to render it in full with type="text" — directly under a hint that calls it
+	 * a secret. Shop owners screenshot this screen for support, record it, share it in meetings;
+	 * the token goes with it and they do not notice, because it looks like every other settings box
+	 * on the page. The site key sitting right above makes that worse: the two fields looked identical
+	 * and one of them is public on purpose.
+	 *
+	 * Leaving the box empty keeps what is stored (handle_sync already ignores an empty submit), so
+	 * the common case — press Sync again — never asks for the token twice.
+	 */
+	$aumchat_token      = (string) $settings['push_token'];
+	$aumchat_token_tail = strlen( $aumchat_token ) > 4 ? substr( $aumchat_token, -4 ) : '';
+	?>
 	<label class="aml-label" for="aumchat-push-token"><?php esc_html_e( 'Sync token', 'aumchat' ); ?></label>
+	<?php if ( '' !== $aumchat_token ) : ?>
+		<p class="aml-field-value">
+			<code><?php echo esc_html( str_repeat( "\xe2\x80\xa2", 8 ) . $aumchat_token_tail ); ?></code>
+			<?php esc_html_e( 'saved', 'aumchat' ); ?>
+		</p>
+	<?php endif; ?>
 	<input
-		type="text"
+		type="password"
 		id="aumchat-push-token"
 		name="push_token"
 		class="aml-input"
-		value="<?php echo esc_attr( $settings['push_token'] ); ?>"
+		value=""
 		autocomplete="off"
 		spellcheck="false"
+		placeholder="<?php echo '' !== $aumchat_token ? esc_attr__( 'Leave empty to keep the saved token', 'aumchat' ) : ''; ?>"
 	/>
 	<p class="aml-field-hint">
 		<?php esc_html_e( 'Copy it from Products in your AumChat workspace. It is a secret — unlike the site key, it is not public.', 'aumchat' ); ?>
 	</p>
+	<?php if ( '' !== $aumchat_token ) : ?>
+		<p class="aml-field-hint">
+			<label>
+				<input type="checkbox" name="forget_token" value="1" />
+				<?php esc_html_e( 'Forget the saved token (stops product sync)', 'aumchat' ); ?>
+			</label>
+		</p>
+	<?php endif; ?>
 
 	<?php if ( is_array( $aumchat_sync ) ) : ?>
 		<div class="<?php echo $aumchat_sync['ok'] ? 'aml-ok' : 'aml-warn'; ?>"><?php echo esc_html( $aumchat_sync['message'] ); ?></div>

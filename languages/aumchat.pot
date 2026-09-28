@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-26T07:13:49+00:00\n"
+"POT-Creation-Date: 2026-09-28T06:56:19+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: aumchat\n"
@@ -18,7 +18,7 @@ msgstr ""
 #: aumchat.php
 #: includes/class-aumchat-admin.php:51
 #: includes/class-aumchat-admin.php:52
-#: includes/class-aumchat-admin.php:345
+#: includes/class-aumchat-admin.php:352
 msgid "AumChat"
 msgstr ""
 
@@ -101,93 +101,105 @@ msgstr ""
 msgid "%s found on this site. Sending your products lets the widget answer questions about them and show product cards."
 msgstr ""
 
-#: admin/views/connected.php:92
+#: admin/views/connected.php:110
 msgid "Sync token"
 msgstr ""
 
-#: admin/views/connected.php:103
+#: admin/views/connected.php:114
+msgid "saved"
+msgstr ""
+
+#: admin/views/connected.php:125
+msgid "Leave empty to keep the saved token"
+msgstr ""
+
+#: admin/views/connected.php:128
 msgid "Copy it from Products in your AumChat workspace. It is a secret — unlike the site key, it is not public."
 msgstr ""
 
+#: admin/views/connected.php:134
+msgid "Forget the saved token (stops product sync)"
+msgstr ""
+
 #. translators: 1: number of products, 2: how long ago, e.g. "2 hours".
-#: admin/views/connected.php:113
+#: admin/views/connected.php:146
 #, php-format
 msgid "Last sync: %1$d products, %2$s ago."
 msgstr ""
 
-#: admin/views/connected.php:121
+#: admin/views/connected.php:154
 msgid "Sync products now"
 msgstr ""
 
-#: admin/views/connected.php:130
+#: admin/views/connected.php:163
 msgid "Where the widget appears"
 msgstr ""
 
-#: admin/views/connected.php:131
+#: admin/views/connected.php:164
 msgid "By default it is on every public page. These rules are applied here in WordPress; nothing about them is sent to AumChat."
 msgstr ""
 
-#: admin/views/connected.php:136
+#: admin/views/connected.php:169
 msgid "Every page"
 msgstr ""
 
-#: admin/views/connected.php:136
+#: admin/views/connected.php:169
 msgid "The usual choice."
 msgstr ""
 
-#: admin/views/connected.php:137
+#: admin/views/connected.php:170
 msgid "Every page except the ones listed below"
 msgstr ""
 
-#: admin/views/connected.php:137
+#: admin/views/connected.php:170
 msgid "For a checkout, a landing page, a form you do not want interrupted."
 msgstr ""
 
-#: admin/views/connected.php:138
+#: admin/views/connected.php:171
 msgid "Only the pages listed below"
 msgstr ""
 
-#: admin/views/connected.php:138
+#: admin/views/connected.php:171
 msgid "For trying it on one page first."
 msgstr ""
 
-#: admin/views/connected.php:153
+#: admin/views/connected.php:186
 msgid "The pages"
 msgstr ""
 
-#: admin/views/connected.php:156
+#: admin/views/connected.php:189
 msgid "One per line. A path covers everything under it, so /shop also covers /shop/mugs. Use / for the home page alone. Pasting a full address works too."
 msgstr ""
 
-#: admin/views/connected.php:162
+#: admin/views/connected.php:195
 msgid "Exceptions"
 msgstr ""
 
-#: admin/views/connected.php:166
+#: admin/views/connected.php:199
 msgid "Hide it from signed-in users with these roles"
 msgstr ""
 
-#: admin/views/connected.php:175
+#: admin/views/connected.php:208
 msgid "Most people tick Administrator, so their own widget stops following them around while they work."
 msgstr ""
 
-#: admin/views/connected.php:186
+#: admin/views/connected.php:219
 msgid "Hide it on the cart and checkout"
 msgstr ""
 
-#: admin/views/connected.php:187
+#: admin/views/connected.php:220
 msgid "Some shops prefer nothing moving while someone is paying."
 msgstr ""
 
-#: admin/views/connected.php:193
+#: admin/views/connected.php:226
 msgid "Save rules"
 msgstr ""
 
-#: admin/views/connected.php:199
+#: admin/views/connected.php:232
 msgid "Hiding it from a theme or another plugin"
 msgstr ""
 
-#: admin/views/connected.php:201
+#: admin/views/connected.php:234
 msgid "When a rule is not enough, one filter decides per request:"
 msgstr ""
 
@@ -219,7 +231,7 @@ msgstr ""
 #: includes/class-aumchat-admin.php:160
 #: includes/class-aumchat-admin.php:221
 #: includes/class-aumchat-admin.php:241
-#: includes/class-aumchat-admin.php:259
+#: includes/class-aumchat-admin.php:266
 msgid "You are not allowed to change these settings."
 msgstr ""
 
@@ -227,40 +239,40 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/class-aumchat-admin.php:290
+#: includes/class-aumchat-admin.php:297
 msgid "Connected. The widget is live on your site."
 msgstr ""
 
-#: includes/class-aumchat-admin.php:291
+#: includes/class-aumchat-admin.php:298
 msgid "Disconnected. The widget has been removed from your site."
 msgstr ""
 
-#: includes/class-aumchat-admin.php:292
+#: includes/class-aumchat-admin.php:299
 msgid "Site key saved, but this server could not reach AumChat to confirm it. The widget will still load for visitors."
 msgstr ""
 
-#: includes/class-aumchat-admin.php:293
+#: includes/class-aumchat-admin.php:300
 msgid "That does not look like a site key. It is 6 to 40 letters and digits."
 msgstr ""
 
-#: includes/class-aumchat-admin.php:294
+#: includes/class-aumchat-admin.php:301
 #: includes/class-aumchat-service.php:65
 msgid "AumChat does not know this site key. Copy it again from your workspace."
 msgstr ""
 
-#: includes/class-aumchat-admin.php:295
+#: includes/class-aumchat-admin.php:302
 msgid "That connection link had expired. Press Connect again."
 msgstr ""
 
-#: includes/class-aumchat-admin.php:296
+#: includes/class-aumchat-admin.php:303
 msgid "Saved."
 msgstr ""
 
-#: includes/class-aumchat-admin.php:347
+#: includes/class-aumchat-admin.php:354
 msgid "Connected"
 msgstr ""
 
-#: includes/class-aumchat-admin.php:350
+#: includes/class-aumchat-admin.php:357
 msgid "Chat with the people on your site, answered by AI until a person takes over."
 msgstr ""
 

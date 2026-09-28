@@ -4,7 +4,7 @@ Tags: live chat, ai chat, customer support, chat widget, chatbot
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,9 @@ The stored site key and the cached status are removed and the widget stops appea
 4. Product sync: the saved token is never shown back — only its last four characters — and the card reports what the last sync actually sent.
 
 == Changelog ==
+
+= 1.0.3 =
+* Fixed a fatal error in 1.0.2 that stopped product sync from running at all. If you installed 1.0.2, update.
 
 = 1.0.2 =
 * Product sync now tells AumChat which site this plugin is connected to, so a sync token copied from a different site in your workspace is refused instead of quietly sending your catalogue to the wrong place.

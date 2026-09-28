@@ -401,7 +401,7 @@ class AumChat_Catalog {
 						 * answering from a catalogue that never changed. Every step succeeds and nothing
 						 * anywhere says a word.
 						 */
-						'siteKey'  => (string) aumchat_settings()['site_key'],
+						'siteKey'  => (string) aumchat_get_settings()['site_key'],
 					)
 				),
 			)

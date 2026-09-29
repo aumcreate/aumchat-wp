@@ -4,7 +4,7 @@ Tags: live chat, ai chat, customer support, chat widget, chatbot
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,6 +53,12 @@ When a rule is not enough, one filter decides per request:
 = Source code =
 
 The released source is on GitHub at [github.com/aumcreate/aumchat-wp](https://github.com/aumcreate/aumchat-wp) — bug reports and pull requests are welcome there.
+
+= More from AumCreate =
+
+How to install this plugin, what it needs, and where the settings live: [aumcreate.com/plugins/aumchat](https://aumcreate.com/plugins/aumchat)
+
+Also free from AumCreate: llms.txt and schema for AI search, AI crawler control, AI translation for WordPress, and digital-goods checkout for WooCommerce: [aumcreate.com/plugins](https://aumcreate.com/plugins)
 
 == External services ==
 
@@ -132,6 +138,9 @@ The stored site key and the cached status are removed and the widget stops appea
 4. Product sync: the saved token is never shown back — only its last four characters — and the card reports what the last sync actually sent.
 
 == Changelog ==
+
+= 1.0.6 =
+* Added a short section pointing to the plugin's own page on aumcreate.com and to the other free AumCreate plugins. No code changes.
 
 = 1.0.5 =
 * The links in the description are now real links. They were plain text, because wordpress.org does not turn a bare address into a link.

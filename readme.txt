@@ -4,7 +4,7 @@ Tags: live chat, ai chat, customer support, chat widget, chatbot
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.3
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -52,7 +52,7 @@ When a rule is not enough, one filter decides per request:
 
 = Source code =
 
-The released source is on GitHub at https://github.com/aumcreate/aumchat-wp — bug reports and pull requests are welcome there.
+The released source is on GitHub at [github.com/aumcreate/aumchat-wp](https://github.com/aumcreate/aumchat-wp) — bug reports and pull requests are welcome there.
 
 == External services ==
 
@@ -132,6 +132,12 @@ The stored site key and the cached status are removed and the widget stops appea
 4. Product sync: the saved token is never shown back — only its last four characters — and the card reports what the last sync actually sent.
 
 == Changelog ==
+
+= 1.0.5 =
+* The links in the description are now real links. They were plain text, because wordpress.org does not turn a bare address into a link.
+
+= 1.0.4 =
+* Added the plugin's own page on aumcreate.com to the plugin header, so the Plugins list links to it. No code changes.
 
 = 1.0.3 =
 * Fixed a fatal error in 1.0.2 that stopped product sync from running at all. If you installed 1.0.2, update.
